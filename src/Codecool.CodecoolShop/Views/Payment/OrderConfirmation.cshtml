@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "OrderConfirmation";
+}
+
+@*@model Codecool.CodecoolShop.Models.PaymentModel
+
+<div class="bg-light">
+    <h1>ORDER CONFIRMATION:</h1>
+    @foreach (var element in Model.GetType().GetProperties())
+    {
+        <p>@element.Name: @element.GetValue(Model, null)</p>
+    }
+    
+    <h1>YOUR ORDER SHOULD BE ON THE WAY SOON</h1>
+</div>*@
+
+<div class="bg-light">
+    <h1>ORDER CONFIRMATION:</h1>
+    @foreach (var element in ViewBag.PaymentModel.GetType().GetProperties())
+    {
+        <p>@element.Name: @element.GetValue(ViewBag.PaymentModel, null)</p>
+    }
+    <h1>YOUR ORDER SHOULD BE ON THE WAY SOON</h1>
+</div>

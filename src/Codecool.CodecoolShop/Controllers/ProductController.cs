@@ -22,14 +22,38 @@ namespace Codecool.CodecoolShop.Controllers
             _logger = logger;
             ProductService = new ProductService(
                 ProductDaoMemory.GetInstance(),
-                ProductCategoryDaoMemory.GetInstance());
+                ProductCategoryDaoMemory.GetInstance(),
+                SupplierDaoMemory.GetInstance());
         }
 
         public IActionResult Index()
         {
-            var products = ProductService.GetProductsForCategory(1);
-            return View(products.ToList());
+            IEnumerable<Product> displayProducts = ProductService.GetProductsForCategory(0);
+
+            IEnumerable<ProductCategory> categories = ProductService.GetAllCategories();
+            IEnumerable<Supplier> suppliers = ProductService.GetAllSuppliers();
+            var homePageModel = new HomePageModel
+            {
+                Categories = categories.ToList(),
+                Products = displayProducts.ToList(),
+                Suppliers = suppliers.ToList(),
+                CategoryId = 0,
+                SupplierId = 0
+            };
+
+            return View(homePageModel);
         }
+
+        public ActionResult FilteredProducts(int categoryId, int supplierId)
+        {
+            IEnumerable<Product> productsInCategory = ProductService.GetProductsForCategory(categoryId);
+            IEnumerable<Product> productsBySupplier = ProductService.GetProductsForSupplier(supplierId);
+
+            IEnumerable<Product> displayProducts = productsInCategory.Where(x => productsBySupplier.Contains(x));
+
+            //UPDATE HOMEPAGE STATE
+            return PartialView("_PartialIndex", displayProducts.ToList());
+        } 
 
         public IActionResult Privacy()
         {

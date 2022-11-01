@@ -2,31 +2,100 @@
     ViewData["Title"] = "Home Page";
 }
 
-@model List<Codecool.CodecoolShop.Models.Product>
+@model Codecool.CodecoolShop.Models.HomePageModel
 
-<div class="container">
-    @foreach (var element in Model)
-    {
-        <div class="col-lg-3 col-lg-3" style="display: inline-block; max-width: 350px; height: 350px">
-            <div class="card">
-                <img src="img/@(element.Name).jpg" style="height: 50%; width: 50%; align-self: center; padding-top: 10px">
+<div class="d-flex flex-column flex-md-row justify-content-between">
+    
+    <div class="order-container p-5 mr-4 col-md-5 col-lg-3 col-xl-2 mb-5 d-flex flex-md-column flex-sm-row justify-content-md-start justify-content-around">
+        <div class="supliers-container">
+            <h5>Supplier:</h5>
+            <div class="suppliers">
+                @if (Model.SupplierId == 0)
+                {
+                    <input type="radio" id="allSuppliers" name="suppliers" value="0" checked/>
+                }
+                else
+                {
+                    <input type="radio" id="allSuppliers" name="suppliers" value="0" />
+                }
+                <label for="allSuppliers">All</label>
+                <br />
 
-                <div class="card-body">
-                    <h5 class="card-title text-center">
-                        Product
-                        @{ var num = Model.IndexOf(element) + 1;}
-                        @num
-                    </h5>
-                    <h5 class="card-title">@element.Name</h5>
-                    <p class="card-text">@element.Description.</p>
-                    <p class="card-text">Category: @element.ProductCategory.Department</p>
-                    <p class="card-text">Supplier: @element.Supplier.Name</p>
-                    <p class="card-text text-center"><strong>Price: @element.DefaultPrice.ToString("C2")</strong></p>
-                    <a href="" type="button" class="btn btn-primary" style="float: bottom">Add To Cart</a>
-                </div>
+                @foreach (var element in Model.Suppliers)
+                {
+                    @if (Model.SupplierId == element.Id)
+                    {
+                        <input type="radio" id="@element.Name" name="suppliers" value="@element.Id" checked/>
+                    }
+                    else
+                    {
+                        <input type="radio" id="@element.Name" name="suppliers" value="@element.Id" />
+                    }
+                    <label for="@element.Name">@element.Name</label>
+                    <br />
+                }
+                
             </div>
         </div>
-    }
+        <div class="categories-container">
+            <h5>Categories:</h5>
+            <div class="categories">
+               
+                @if (Model.CategoryId == 0)
+                {
+                    <input type="radio" id="allCategories" name="categories" value="0" checked/>
+                }
+                else
+                {
+                    <input type="radio" id="allCategories" name="categories" value="0" />
+                }
+                <label for="allCategories">All</label>
+                <br/>
 
+                @foreach (var element in Model.Categories)
+                {
+                    @if (Model.CategoryId == element.Id)
+                    {
+                        <input type="radio" id="@element.Name" name="categories" value="@element.Id" checked/>
+                    }
+                    else
+                    {
+                        <input type="radio" id="@element.Name" name="categories" value="@element.Id" />
+                    }
+                    <label for="@element.Name">@element.Name</label>
+                    <br />
+                }
+               
+            </div>
+        </div>
+    </div>
+
+    <div id="productContainer" class="container justify-content-around text-center col-md-7 col-lg-9 col-xl-10" style="height: fit-content;">
+
+        @foreach (var element in Model.Products)
+        {
+            <div class="col-md-6 col-lg-4 mb-5" style="display: inline-block; max-width: 270px; height: 360px;">
+                <div class="card pb-5" style="overflow: hidden; height: 360px;">
+                    <img src="img/@(element.Name).jpg" style="height: 129px; width: 50%; align-self: center; padding-top: 10px">
+
+                    <div class="card-body" style="max-height: 100%; overflow: hidden;">
+                        <div class="card-bg-gradient"></div>
+                        <h5 class="card-title text-center">
+                            Product
+                            @{ var num = Model.Products.IndexOf(element) + 1;}
+                            @num
+                        </h5>
+                        <h5 class="card-title">@element.Name</h5>
+                        <p class="card-text">@element.Description.</p>
+                        <p class="card-text">Category: @element.ProductCategory.Department</p>
+                        <p class="card-text">Supplier: @element.Supplier.Name</p>
+                        <p class="card-text text-center"><strong>Price: @element.DefaultPrice.ToString("C2")</strong></p>
+                        <button value="@element.Id" type="button" class="btn btn-primary add-to-cart-btn" style="float: bottom">Add To Cart</button>
+                    </div>
+                </div>
+                <button id="seeMoreBtn@(element.Id)" class="see-more-btn" type="button">See More...</button>
+            </div>
+        }
+    </div>
 
 </div>

@@ -1,15 +1,86 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background-image: url("images/background.jpg");
+    background-size: 100%;
+    background-repeat: repeat;
+    overflow-x: hidden; 
+}
+
 a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
 }
 
+.order-container {
+    height: fit-content;
+}
+.see-more-btn {
+    color: deepskyblue;
+    background: none;
+    outline: none;
+    border: none;
+    position: relative;
+    bottom: 40px;
+    transition: 0.3s ease;
+}
+.see-more-btn:focus {
+    outline: none;
+}
+.see-more-btn:hover {
+    border-bottom: 1px solid deepskyblue;
+    transform: scale(1.05);
+}
+.see-more-btn:active {
+    transform: scale(0.9);
+    border-bottom: none;
+}
+.cart {
+    color: white;
+    position: absolute;
+    right: 0px;
+    top: 10px;
+    height: 35px;
+    width: 35.25px;
+    background: #0366d6;
+    padding: 8px 8px 4px 7px;
+    border-radius: 25%;
+    margin-right: 25px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 1000;
+}
+.cart i {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    transition: all 1s ease;
+    z-index: -1;
+}
+
+.cart:hover {
+    transform: rotate(25deg) scale(1.05);
+}
+.modal-background {
+    position: relative;
+    top: 0;
+    left: 0;
+    background: black;
+    opacity: 0; 
+    transition: opacity 1s ease;
+}
+
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 .btn-primary {
@@ -23,11 +94,15 @@ a {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+.order-container {
+    background: #fff;
+    border-radius: 10px;
+}
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 12px;
 }
 @media (min-width: 768px) {
   html {
@@ -68,4 +143,56 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+}
+
+/* Transparent gradient cards
+-------------------------------------------------- */
+.card-body {
+    position: relative;
+    padding-bottom: 0;
+}
+
+.card-bg-gradient {
+    position: absolute;
+    height: 90%;
+    width: 84%;
+    background: linear-gradient(to bottom, transparent, #fff)
+}
+
+/* Transitions
+-------------------------------------------------- */
+
+.card {
+    transition: all 0.3s ease;
+}
+.cart-container table {
+    transition: all 1s ease;
+    opacity: 0;
+}
+
+/* Cart Table
+-------------------------------------------------- */
+.cart-container table {
+    width: 80%;
+    margin: auto;
+    z-index: 100000;
+}
+
+.cart-container td {
+    color: black;
+    font-weight: bold;
+    margin-right: 10px;
+    margin-bottom: 15px;
+    width: 20%;
+    text-align: center;
+}
+
+/* Payment Method
+-------------------------------------------------- */
+.containerPayment {
+    max-width: 960px;
+}
+
+.lh-condensed {
+    line-height: 1.25;
 }
