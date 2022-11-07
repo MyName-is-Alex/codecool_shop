@@ -26,11 +26,9 @@ namespace Codecool.CodecoolShop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-<<<<<<< HEAD
             services.AddMvc();
             services.AddSession();
-=======
->>>>>>> 1bcbcd9d0b006f026dd209ed5e604879ac61ff9e
+
             services.AddControllersWithViews();
         }
 
@@ -52,11 +50,8 @@ namespace Codecool.CodecoolShop
 
             app.UseRouting();
 
-<<<<<<< HEAD
             app.UseSession();
 
-=======
->>>>>>> 1bcbcd9d0b006f026dd209ed5e604879ac61ff9e
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -77,7 +72,7 @@ namespace Codecool.CodecoolShop
 
             Supplier amazon = new Supplier{Name = "Amazon", Description = "Digital content and services"};
             supplierDataStore.Add(amazon);
-<<<<<<< HEAD
+
             Supplier emag = new Supplier{ Name = "EMag", Description = "Everything you think of" };
             supplierDataStore.Add(emag);
             Supplier lenovo = new Supplier{Name = "Lenovo", Description = "Computers"};
@@ -87,17 +82,9 @@ namespace Codecool.CodecoolShop
             productCategoryDataStore.Add(tablet);
             ProductCategory phone = new ProductCategory { Name = "Phone", Department = "Hardware", Description = "A phone, commonly shortened to phone, is a thin, flat mobile computer with a touchscreen display." };
             productCategoryDataStore.Add(phone);
-            
-            productDataStore.Add(new Product { Name = "Amazon Fire", DefaultPrice = 49.9m, Currency = "USD", Description = "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", ProductCategory = phone, Supplier = amazon });
-            productDataStore.Add(new Product { Name = "Lenovo IdeaPad Miix 700", DefaultPrice = 479.0m, Currency = "USD", Description = "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", ProductCategory = tablet, Supplier = amazon });
-=======
-            Supplier lenovo = new Supplier{Name = "Lenovo", Description = "Computers"};
-            supplierDataStore.Add(lenovo);
-            ProductCategory tablet = new ProductCategory {Name = "Tablet", Department = "Hardware", Description = "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display." };
-            productCategoryDataStore.Add(tablet);
+
             productDataStore.Add(new Product { Name = "Amazon Fire", DefaultPrice = 49.9m, Currency = "USD", Description = "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", ProductCategory = tablet, Supplier = amazon });
             productDataStore.Add(new Product { Name = "Lenovo IdeaPad Miix 700", DefaultPrice = 479.0m, Currency = "USD", Description = "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", ProductCategory = tablet, Supplier = lenovo });
->>>>>>> 1bcbcd9d0b006f026dd209ed5e604879ac61ff9e
             productDataStore.Add(new Product { Name = "Amazon Fire HD 8", DefaultPrice = 89.0m, Currency = "USD", Description = "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", ProductCategory = tablet, Supplier = amazon });
         }
     }

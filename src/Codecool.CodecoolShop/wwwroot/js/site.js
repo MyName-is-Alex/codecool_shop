@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-﻿// FILTER PRODUCTS
+// FILTER PRODUCTS
 
 function orderProducts() {
     const suppliersButtons = document.querySelectorAll("[name=suppliers]");
@@ -328,9 +327,3 @@ displayCards();
 orderProducts();
 
 handleCart();
-=======
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
->>>>>>> 1bcbcd9d0b006f026dd209ed5e604879ac61ff9e

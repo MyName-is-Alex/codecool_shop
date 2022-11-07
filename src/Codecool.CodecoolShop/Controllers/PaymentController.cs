@@ -15,19 +15,24 @@ namespace Codecool.CodecoolShop.Controllers
 
         public ActionResult OrderConfirmation(PaymentModel paymentModel)
         {
-            var cart = SessionHelper.GetObjectFromJson<List<ItemModel>>(HttpContext.Session, "cart");
-            if (cart == null)
+            if (ModelState.IsValid)
             {
-                cart = new List<ItemModel>();
+                var cart = SessionHelper.GetObjectFromJson<List<ItemModel>>(HttpContext.Session, "cart");
+                if (cart == null)
+                {
+                    cart = new List<ItemModel>();
+                }
+
+                CartModel cartModel = new CartModel
+                    { Items = cart, TotalPrice = cart.Sum(x => x.Product.DefaultPrice * x.Quantity) };
+
+                ViewBag.TotalPrice = cartModel.TotalPrice;
+                ViewBag.PaymentModel = paymentModel;
+                return View();
             }
 
-            CartModel cartModel = new CartModel
-                { Items = cart, TotalPrice = cart.Sum(x => x.Product.DefaultPrice * x.Quantity) };
+            return View("Index");
 
-            ViewBag.TotalPrice = cartModel.TotalPrice;
-            ViewBag.PaymentModel = paymentModel;
-
-            return View();
         }
     }
 
