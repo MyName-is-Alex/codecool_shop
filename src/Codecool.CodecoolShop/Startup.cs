@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Codecool.CodecoolShop.DAL;
 using Codecool.CodecoolShop.Daos;
 using Codecool.CodecoolShop.Daos.Implementations;
 using Codecool.CodecoolShop.Models;
@@ -11,14 +12,18 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
 
 namespace Codecool.CodecoolShop
 {
     public class Startup
     {
+        public string DbMode { get; set; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            DbMode = Configuration.GetValue<string>("Mode");
         }
 
         public IConfiguration Configuration { get; }
@@ -30,6 +35,9 @@ namespace Codecool.CodecoolShop
             services.AddSession();
 
             services.AddControllersWithViews();
+
+            if (DbMode == "ssql")
+                services.AddDbContext<CodecoolShopContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,7 +69,8 @@ namespace Codecool.CodecoolShop
                     pattern: "{controller=Product}/{action=Index}/{id?}");
             });
 
-            SetupInMemoryDatabases();
+            if (DbMode == "inMemory")
+                SetupInMemoryDatabases();
         }
 
         private void SetupInMemoryDatabases()
@@ -78,7 +87,7 @@ namespace Codecool.CodecoolShop
             Supplier lenovo = new Supplier{Name = "Lenovo", Description = "Computers"};
             supplierDataStore.Add(lenovo);
             
-            ProductCategory tablet = new ProductCategory {Name = "Tablet", Department = "Hardware", Description = "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display." };
+            ProductCategory tablet = new ProductCategory { Name = "Tablet", Department = "Hardware", Description = "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display." };
             productCategoryDataStore.Add(tablet);
             ProductCategory phone = new ProductCategory { Name = "Phone", Department = "Hardware", Description = "A phone, commonly shortened to phone, is a thin, flat mobile computer with a touchscreen display." };
             productCategoryDataStore.Add(phone);
