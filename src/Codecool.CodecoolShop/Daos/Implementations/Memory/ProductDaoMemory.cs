@@ -4,20 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Codecool.CodecoolShop.Models;
 
-namespace Codecool.CodecoolShop.Daos.Implementations
+namespace Codecool.CodecoolShop.Daos.Implementations.Memory
 {
     public class ProductDaoMemory : IProductDao
     {
-        private List<Product> data = new ();
-        private static ProductDaoMemory instance = null;
+        private List<Product> data = new();
+        public static ProductDaoMemory instance = null;
 
         private ProductDaoMemory()
         {
-        }
-
-        private ProductDaoMemory(List<Product> _data)
-        {
-            data = _data;
         }
 
         public static ProductDaoMemory GetInstance()
@@ -25,16 +20,6 @@ namespace Codecool.CodecoolShop.Daos.Implementations
             if (instance == null)
             {
                 instance = new ProductDaoMemory();
-            }
-
-            return instance;
-        }
-
-        public static ProductDaoMemory GetInstance(List<Product> data)
-        {
-            if (instance == null)
-            {
-                instance = new ProductDaoMemory(data);
             }
 
             return instance;
@@ -48,7 +33,7 @@ namespace Codecool.CodecoolShop.Daos.Implementations
 
         public void Remove(int id)
         {
-            data.Remove(this.Get(id));
+            data.Remove(Get(id));
         }
 
         public Product Get(int id)

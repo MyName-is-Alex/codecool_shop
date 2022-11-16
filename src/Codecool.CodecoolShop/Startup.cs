@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Codecool.CodecoolShop.DAL;
 using Codecool.CodecoolShop.Daos;
-using Codecool.CodecoolShop.Daos.Implementations;
 using Codecool.CodecoolShop.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Codecool.CodecoolShop.Daos.Implementations.Memory;
+using Codecool.CodecoolShop.Daos.Implementations.Database;
 
 namespace Codecool.CodecoolShop
 {
@@ -33,11 +34,23 @@ namespace Codecool.CodecoolShop
         {
             services.AddMvc();
             services.AddSession();
-
+            
             services.AddControllersWithViews();
 
-            if (DbMode == "ssql")
+            if (DbMode == "sql")
+            {
                 services.AddDbContext<CodecoolShopContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+                services.AddScoped<IProductDao, ProductDaoDatabase>();
+                services.AddScoped<IProductCategoryDao, ProductCategoryDaoDatabase>();
+                services.AddScoped<ISupplierDao, SupplierDaoDatabase>();
+            }
+            else if (DbMode == "inMemory")
+            {
+                services.AddSingleton<IProductDao>(ProductDaoMemory.GetInstance());
+                services.AddSingleton<IProductCategoryDao>(ProductCategoryDaoMemory.GetInstance());
+                services.AddSingleton<ISupplierDao>(SupplierDaoMemory.GetInstance());
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,12 +82,14 @@ namespace Codecool.CodecoolShop
                     pattern: "{controller=Product}/{action=Index}/{id?}");
             });
 
-            if (DbMode == "inMemory")
+            if (DbMode == "inMemory") 
                 SetupInMemoryDatabases();
+            
         }
 
         private void SetupInMemoryDatabases()
         {
+
             IProductDao productDataStore = ProductDaoMemory.GetInstance();
             IProductCategoryDao productCategoryDataStore = ProductCategoryDaoMemory.GetInstance();
             ISupplierDao supplierDataStore = SupplierDaoMemory.GetInstance();
@@ -95,6 +110,7 @@ namespace Codecool.CodecoolShop
             productDataStore.Add(new Product { Name = "Amazon Fire", DefaultPrice = 49.9m, Currency = "USD", Description = "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", ProductCategory = tablet, Supplier = amazon });
             productDataStore.Add(new Product { Name = "Lenovo IdeaPad Miix 700", DefaultPrice = 479.0m, Currency = "USD", Description = "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", ProductCategory = tablet, Supplier = lenovo });
             productDataStore.Add(new Product { Name = "Amazon Fire HD 8", DefaultPrice = 89.0m, Currency = "USD", Description = "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", ProductCategory = tablet, Supplier = amazon });
+            
         }
     }
 }

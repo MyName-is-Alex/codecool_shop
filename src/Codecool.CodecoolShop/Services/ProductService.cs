@@ -19,7 +19,7 @@ namespace Codecool.CodecoolShop.Services
             this.supplierDao = supplierDao;
         }
 
-        public IEnumerable<Product>  GetProductsForCategory(int categoryId)
+        public IEnumerable<Product> GetProductsForCategory(int categoryId)
         {
             if (categoryId != 0)
             {

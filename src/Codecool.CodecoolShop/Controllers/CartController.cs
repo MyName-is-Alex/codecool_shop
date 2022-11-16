@@ -4,10 +4,10 @@ using Codecool.CodecoolShop.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
-using Codecool.CodecoolShop.Daos.Implementations;
 using Codecool.CodecoolShop.Services;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Codecool.CodecoolShop.Daos.Implementations.Memory;
 
 namespace Codecool.CodecoolShop.Controllers
 {

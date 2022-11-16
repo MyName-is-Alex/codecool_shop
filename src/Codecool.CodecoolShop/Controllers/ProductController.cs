@@ -16,25 +16,19 @@ namespace Codecool.CodecoolShop.Controllers
     public class ProductController : Controller
     {
         private readonly ILogger<ProductController> _logger;
-        private readonly CodecoolShopContext _dbContext;
         public ProductService ProductService { get; set; }
 
-        public ProductController(ILogger<ProductController> logger, CodecoolShopContext dbContext)
+        public ProductController(ILogger<ProductController> logger, IProductDao productDao, IProductCategoryDao categoryDao, ISupplierDao supplierDao)
         {
             _logger = logger;
-            _dbContext = dbContext;
 
-            ProductService = new ProductService(
-                ProductDaoMemory.GetInstance(),
-                    ProductCategoryDaoMemory.GetInstance(),
-                    SupplierDaoMemory.GetInstance()
-                );
-
-            ProductCategoryDaoMemory.GetInstance();
+            ProductService = new ProductService(productDao, categoryDao, supplierDao);
         }
 
         public IActionResult Index()
         {
+            _logger.LogInformation("Requested Index page");
+
             IEnumerable<Product> displayProducts = ProductService.GetProductsForCategory(0);
 
             IEnumerable<ProductCategory> categories = ProductService.GetAllCategories();

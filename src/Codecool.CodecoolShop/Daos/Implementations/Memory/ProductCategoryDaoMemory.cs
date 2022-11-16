@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using Codecool.CodecoolShop.Models;
 
-namespace Codecool.CodecoolShop.Daos.Implementations
+namespace Codecool.CodecoolShop.Daos.Implementations.Memory
 {
     class ProductCategoryDaoMemory : IProductCategoryDao
     {
         private List<ProductCategory> data = new List<ProductCategory>();
-        private static ProductCategoryDaoMemory instance = null;
+        public static ProductCategoryDaoMemory instance = null;
 
         private ProductCategoryDaoMemory()
         {
@@ -30,7 +30,7 @@ namespace Codecool.CodecoolShop.Daos.Implementations
 
         public void Remove(int id)
         {
-            data.Remove(this.Get(id));
+            data.Remove(Get(id));
         }
 
         public ProductCategory Get(int id)
