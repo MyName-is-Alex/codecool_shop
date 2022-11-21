@@ -3,13 +3,31 @@ using Codecool.CodecoolShop.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using Codecool.CodecoolShop.DAL;
+using Codecool.CodecoolShop.Daos;
+using Codecool.CodecoolShop.Daos.Implementations.Database;
+using Codecool.CodecoolShop.Services;
 
 namespace Codecool.CodecoolShop.Controllers
 {
-    public class PaymentController : Controller
+    public class PaymentController : BaseController
     {
+        private CartService cartService;
+
+        public PaymentController(CartDaoDatabase cartDao)
+        {
+            cartService = new CartService(cartDao);
+        }
+
         public ActionResult Index()
         {
+            if (SessionHelper.GetUserFromJson(HttpContext.Session, "user") != null)
+            {
+                string user = SessionHelper.GetUserFromJson(HttpContext.Session, "user");
+                var cart = SessionHelper.GetObjectFromJson<List<ItemModel>>(HttpContext.Session, "cart");
+                cartService.AddCartToDb(cart, user);
+            }
+
             return View();
         }
 

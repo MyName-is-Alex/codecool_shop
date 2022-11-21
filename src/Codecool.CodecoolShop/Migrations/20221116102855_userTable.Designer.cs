@@ -3,6 +3,7 @@ using Codecool.CodecoolShop.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Codecool.CodecoolShop.Migrations
 {
     [DbContext(typeof(CodecoolShopContext))]
-    partial class CodecoolShopContextModelSnapshot : ModelSnapshot
+    [Migration("20221116102855_userTable")]
+    partial class userTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,30 +41,6 @@ namespace Codecool.CodecoolShop.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AppUser");
-                });
-
-            modelBuilder.Entity("Codecool.CodecoolShop.Models.ItemModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("AppUserEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ItemModel");
                 });
 
             modelBuilder.Entity("Codecool.CodecoolShop.Models.Product", b =>
@@ -208,27 +187,16 @@ namespace Codecool.CodecoolShop.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Codecool.CodecoolShop.Models.ItemModel", b =>
-                {
-                    b.HasOne("Codecool.CodecoolShop.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("Codecool.CodecoolShop.Models.Product", b =>
                 {
                     b.HasOne("Codecool.CodecoolShop.Models.ProductCategory", "ProductCategory")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("ProductCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Codecool.CodecoolShop.Models.Supplier", "Supplier")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("SupplierId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -236,6 +204,16 @@ namespace Codecool.CodecoolShop.Migrations
                     b.Navigation("ProductCategory");
 
                     b.Navigation("Supplier");
+                });
+
+            modelBuilder.Entity("Codecool.CodecoolShop.Models.ProductCategory", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("Codecool.CodecoolShop.Models.Supplier", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

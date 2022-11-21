@@ -1,5 +1,3 @@
-using System;
-using System.Reflection.Metadata;
 using Codecool.CodecoolShop.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +11,8 @@ public class CodecoolShopContext : DbContext
     public DbSet<Product> Product { get; set; }
     public DbSet<ProductCategory> ProductCategory { get; set; }
     public DbSet<Supplier> Supplier { get; set; }
+    public DbSet<AppUser> AppUser { get; set; }
+    public DbSet<ItemModel> ItemModel { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

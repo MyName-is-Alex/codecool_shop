@@ -24,7 +24,7 @@ public class ProductDaoDatabase : IProductDao
         _context.Product.Add(item);
         _context.SaveChanges();
 
-        _logger.LogInformation("Db after update:" + _context.Product.Count().ToString());
+        _logger.LogInformation("Db after update:" + _context.Product.Count());
     }
 
     public void Remove(int id)
@@ -36,7 +36,8 @@ public class ProductDaoDatabase : IProductDao
 
     public Product Get(int id)
     {
-        return _context.Product.Single(x => x.Id == id);
+        var temp = _context.GetCompleteProducts().Single(x => x.Id == id);
+        return temp;
     }
 
     public IEnumerable<Product> GetAll()

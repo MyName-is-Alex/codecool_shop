@@ -41,7 +41,7 @@ function orderProducts() {
 
 async function getProducts(categoryId, supplierId) {
 
-    const URL = `Product/FilteredProducts?categoryId=${categoryId}&supplierId=${supplierId}`;
+    const URL = `/Product/FilteredProducts?categoryId=${categoryId}&supplierId=${supplierId}`;
 
     $.ajax({
         type: "POST",
@@ -102,7 +102,7 @@ function handleCart() {
 }
 
 async function getCart() {
-    const URL = `cart/cartpreview`;
+    const URL = `/cart/cartpreview`;
 
     $.ajax({
         type: "POST",
@@ -208,7 +208,7 @@ function handleAddToCart() {
 }
 
 function addToCartSession(id) {
-    const URL = `cart/buy/${id}`
+    const URL = `/cart/buy/${id}`
     $.ajax({
         type: "POST",
         url: URL,
@@ -229,7 +229,7 @@ function renderTableBody(data) {
     for (product of data) {
         tableRows += `<tr>
                           <td>
-                              <img src="img/${product.product.name}.jpg" style="height: 100%; width: 50%; align-self: center; padding-top: 10px">
+                              <img src="/img/${product.product.name}.jpg" style="height: 100%; width: 50%; align-self: center; padding-top: 10px">
                           </td>
                           <td>${product.product.name}</td>
                           <td>${product.product.defaultPrice}</td>
@@ -260,7 +260,7 @@ function handleEditCart() {
 }
 
 function updateCartContent(id, action, event) {
-    const URL = `cart/${action}/${id}`
+    const URL = `/cart/${action}/${id}`
     $.ajax({
         type: "POST",
         url: URL,

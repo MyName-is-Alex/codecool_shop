@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Codecool.CodecoolShop.DAL;
 using Codecool.CodecoolShop.Daos;
 using Codecool.CodecoolShop.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -44,6 +39,8 @@ namespace Codecool.CodecoolShop
                 services.AddScoped<IProductDao, ProductDaoDatabase>();
                 services.AddScoped<IProductCategoryDao, ProductCategoryDaoDatabase>();
                 services.AddScoped<ISupplierDao, SupplierDaoDatabase>();
+                services.AddScoped<CartDaoDatabase>();
+                services.AddScoped<UserDaoDatabase>();
             }
             else if (DbMode == "inMemory")
             {
@@ -94,7 +91,7 @@ namespace Codecool.CodecoolShop
             IProductCategoryDao productCategoryDataStore = ProductCategoryDaoMemory.GetInstance();
             ISupplierDao supplierDataStore = SupplierDaoMemory.GetInstance();
 
-            Supplier amazon = new Supplier{Name = "Amazon", Description = "Digital content and services"};
+            Supplier amazon = new Supplier{ Name = "Amazon", Description = "Digital content and services"};
             supplierDataStore.Add(amazon);
 
             Supplier emag = new Supplier{ Name = "EMag", Description = "Everything you think of" };

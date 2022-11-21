@@ -13,7 +13,7 @@ using Codecool.CodecoolShop.DAL;
 
 namespace Codecool.CodecoolShop.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController : BaseController
     {
         private readonly ILogger<ProductController> _logger;
         public ProductService ProductService { get; set; }

@@ -13,4 +13,12 @@ public static class Extensions
             .Include(b => b.ProductCategory)
             .Include(c => c.Supplier);
     }
+
+    public static IQueryable<ItemModel> GetCompleteCart(this CodecoolShopContext context)
+    {
+        return context.ItemModel
+            .Include(b => b.Product)
+            .Include(c => c.Product.ProductCategory)
+            .Include(d => d.Product.Supplier);
+    }
 }

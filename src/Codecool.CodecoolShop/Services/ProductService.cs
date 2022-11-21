@@ -40,19 +40,6 @@ namespace Codecool.CodecoolShop.Services
             return productDao.GetAll();
         }
 
-        public ProductService(IProductDao productDao, IProductCategoryDao productCategoryDao)
-        {
-            this.productDao = productDao;
-            this.productCategoryDao = productCategoryDao;
-
-        }
-
-        public ProductCategory GetProductCategory(int categoryId)
-        {
-            return this.productCategoryDao.Get(categoryId);
-        }
-
-
         public IEnumerable<ProductCategory> GetAllCategories()
         {
             return productCategoryDao.GetAll();

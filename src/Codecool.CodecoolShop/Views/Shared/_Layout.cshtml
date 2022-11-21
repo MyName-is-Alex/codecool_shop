@@ -53,6 +53,16 @@
                     </table>
                 </div>
             </div>
+            <div id="authenticationBtns" class="d-flex flex-row text-nowrap" style="margin-right: @(ViewData["user"] == null ? "80px" : "20px")">
+                <a asp-controller="Authentication" asp-action="Login" role="button" id="logInBtn" class="mr-3 btn btn-primary ">Log In</a>
+                <a asp-controller="Authentication" asp-action="Register" role="button" id="registerBtn" class="mr-3 btn btn-primary">Register</a>
+            </div>
+            @if (ViewData["user"] != null)
+            {
+                <div class="px-3 py-2 bg-success text-light rounded" style="margin-right: 80px">
+                    <p class="mb-0 text-nowrap">Welcome @ViewData["user"]</p>
+                </div>
+            }
         </nav>
     </header>
     <div class="container">
