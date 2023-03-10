@@ -24,7 +24,7 @@ public class PaymentModel
     public string City { get; set; }
 
     [Required(ErrorMessage = "Required")]
-    public string Zip { get; set; }
+    public string ZipCode { get; set; }
 
     [Required(ErrorMessage = "Required")]
     public string NameOnCard { get; set; }

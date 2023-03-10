@@ -245,15 +245,12 @@ function handleEditCart() {
     const buy = "buy";
     const remove = "remove";
     const inputQuantity = document.querySelectorAll(".quantity-input")
-
     inputQuantity.forEach((input) => {
-        let previousInputValue = input.value;
-
+        let previousInputValue = parseInt(input.value);
         input.addEventListener('change', (event) => {
             const itemId = input.dataset.itemId;
-
-            input.value > previousInputValue ? updateCartContent(itemId, buy, event) : updateCartContent(itemId, remove, event)
-
+            console.log(previousInputValue)
+            parseInt(input.value) > parseInt(previousInputValue) ? updateCartContent(itemId, buy, event) : updateCartContent(itemId, remove, event)
             previousInputValue = input.value;
         })
     })
@@ -288,7 +285,6 @@ function updateCartContent(id, action, event) {
             const totalProductsPrice = data.reduce((a, b) => {
                 return a + (b.product.defaultPrice * b.quantity);
             }, 0)
-
             totalProductsPriceDOM.innerText = totalProductsPrice.toFixed(2);
         },
         error: function (response) {
