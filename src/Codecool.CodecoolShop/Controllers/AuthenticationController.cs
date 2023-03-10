@@ -48,7 +48,13 @@ namespace Codecool.CodecoolShop.Controllers
         {
             return View("SignInIndex");
         }
-
+        
+        public IActionResult Logout()
+        {
+            SessionHelper.DeleteUserFromSession(HttpContext.Session, "user");
+            return RedirectToAction("Index", "Product");
+        }
+        
         [HttpPost]
         public IActionResult Login(SingInVM signIn)
         {

@@ -21,6 +21,10 @@ public static class SessionHelper
         session.SetString(key, userName);
     }
 
+    public static void DeleteUserFromSession(this ISession session, string key)
+    {
+        session.Remove(key);
+    }
     public static string GetUserFromJson(this ISession session, string key)
     {
         var value = session.GetString(key);
