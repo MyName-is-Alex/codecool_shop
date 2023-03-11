@@ -45,3 +45,20 @@ Codecool Shop is licensed under the MIT License. See the LICENSE file for more i
 ## Contact
 
 If you have any questions or suggestions about WhatNotRent, feel free to contact me at mitualex12@yahoo.com.
+
+## Preview
+
+### Home Page Desktop
+![Home Page Desktop](https://i.ibb.co/61JLS9v/codecoolshop-homepage-desktop.jpg)
+
+### Login Form Desktop
+![Login Form Desktop](https://i.ibb.co/prVhNwV/codecoolshop-loginform-desktop.jpg)
+
+### Cart Desktop
+![Cart Desktop](https://i.ibb.co/ykJLKZf/codecoolshop-cart-desktop.jpg)
+
+### Cart Preview Desktop
+![Cart Preview Desktop](https://i.ibb.co/s2yp33y/codecoolshop-cartpreview-desktop.jpg)
+
+### Home Page Mobile
+![Home Page Mobile](https://i.ibb.co/9rXKnMD/codecoolshop-homepage-mobile.jpg)
