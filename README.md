@@ -44,7 +44,7 @@ If you would like to contribute to Codecool Shop, please follow these steps:
 Codecool Shop is licensed under the MIT License. See the LICENSE file for more information.
 ## Contact
 
-If you have any questions or suggestions about WhatNotRent, feel free to contact me at mitualex12@yahoo.com.
+If you have any questions or suggestions about Codecool Shop, feel free to contact me at mitualex12@yahoo.com.
 
 ## Preview
 
